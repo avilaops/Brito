@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrato de Amizade - Fogão Parcelado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '🤝';
+            font-size: 150px;
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #f5576c;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .parties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .party {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .party:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .party h3 {
+            font-family: 'Playfair Display', serif;
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .party p {
+            color: #555;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .details {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 2px dashed rgba(102, 126, 234, 0.3);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .detail-value {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(250, 112, 154, 0.3);
+        }
+
+        .highlight h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .highlight p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        .payment-schedule {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .payment-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .payment-item:hover {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.2) 0%, rgba(245, 87, 108, 0.2) 100%);
+            transform: translateX(5px);
+        }
+
+        .payment-number {
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .payment-value {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .footer-date {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+            padding-top: 30px;
+        }
+
+        .signature-line {
+            border-top: 2px solid #667eea;
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        .signature-name {
+            font-weight: 600;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .emoji-decoration {
+            font-size: 2em;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+
+            .parties,
+            .signatures {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Contrato de Amizade 🔥</h1>
+            <p>Venda de Fogão Parcelado na Palavra</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">As Partes</h2>
+                <div class="parties">
+                    <div class="party">
+                        <h3>👨‍🍳 Vendedor</h3>
+                        <p>Nicolas Rosa</p>
+                    </div>
+                    <div class="party">
+                        <h3>🤝 Comprador</h3>
+                        <p>Renan Britto</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Objeto da Transação</h2>
+                <div class="details">
+                    <div class="detail-item">
+                        <span class="detail-label">📦 Produto:</span>
+                        <span class="detail-value">Fogão</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">💰 Valor Total:</span>
+                        <span class="detail-value">R$ 800,00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">📅 Parcelas:</span>
+                        <span class="detail-value">8x de R$ 100,00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h3>🤝 A Única Garantia 🤝</h3>
+                <p><span class="emoji-decoration">✨</span>A Palavra & A Amizade<span class="emoji-decoration">✨</span>
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Cronograma de Pagamento</h2>
+                <div class="payment-schedule">
+                    <div class="payment-item">
+                        <div class="payment-number">1</div>
+                        <div class="payment-value">R$ 100,00 - Primeira Parcela</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-number">2</div>
+                        <div class="payment-value">R$ 100,00 - Segunda Parcela</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-number">3</div>
+                        <div class="payment-value">R$ 100,00 - Terceira Parcela</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-number">4</div>
+                        <div class="payment-value">R$ 100,00 - Quarta Parcela</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-number">5</div>
+                        <div class="payment-value">R$ 100,00 - Quinta Parcela</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-number">6</div>
+                        <div class="payment-value">R$ 100,00 - Sexta Parcela</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-number">7</div>
+                        <div class="payment-value">R$ 100,00 - Sétima Parcela</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-number">8</div>
+                        <div class="payment-value">R$ 100,00 - Oitava Parcela (Final)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Termos e Condições</h2>
+                <div
+                    style="background: rgba(102, 126, 234, 0.05); padding: 25px; border-radius: 15px; line-height: 1.8;">
+                    <p style="margin-bottom: 15px;">
+                        <strong>📜 Cláusula 1:</strong> Este acordo é firmado com base na confiança mútua e na amizade
+                        existente entre as partes.
+                    </p>
+                    <p style="margin-bottom: 15px;">
+                        <strong>🤝 Cláusula 2:</strong> O comprador Renan Britto se compromete a efetuar 8 (oito)
+                        pagamentos mensais de R$ 100,00 (cem reais) cada.
+                    </p>
+                    <p style="margin-bottom: 15px;">
+                        <strong>💪 Cláusula 3:</strong> A única garantia deste contrato é a palavra empenhada entre
+                        amigos, valor este inestimável e de honra.
+                    </p>
+                    <p style="margin-bottom: 15px;">
+                        <strong>❤️ Cláusula 4:</strong> A amizade entre as partes permanece acima de qualquer transação
+                        comercial.
+                    </p>
+                    <p
+                        style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); padding: 15px; border-radius: 10px; color: white; font-weight: 600;">
+                        <strong>⚠️ Cláusula 5 (Garantia Alternativa):</strong> Em caso de inadimplência, o vendedor
+                        Nicolas Rosa se reserva o direito de adotar o filho do comprador Renan Britto como forma de
+                        compensação. 👶😄
+                    </p>
+                </div>
+            </div>
+
+            <div class="signatures">
+                <div class="signature-line">
+                    <div class="signature-name">
+                        _________________________<br>
+                        <strong>Nicolas Rosa</strong><br>
+                        Vendedor
+                    </div>
+                </div>
+                <div class="signature-line">
+                    <div class="signature-name">
+                        _________________________<br>
+                        <strong>Renan Britto</strong><br>
+                        Comprador
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="footer-date">📅 Data: 24 de Novembro de 2025</p>
+            <p style="font-style: italic; opacity: 0.9;">
+                "Na amizade, a palavra vale mais que qualquer contrato."
+            </p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                🔥 Que este fogão aqueça muitas refeições e momentos felizes! 🔥
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
