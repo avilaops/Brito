@@ -1,4 +1,5 @@
 import smtplib
+import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
@@ -15,10 +16,12 @@ RECIPIENT_NAME = "Britto, fi do Huck"
 RECIPIENT_EMAIL = "Renanbrito80@gmail.com"
 RECIPIENT_WHATSAPP = "+55 17 99664-5886"
 
-# Configurações SMTP
-SMTP_SERVER = "smtp.porkbun.com"
+# Configurações SendGrid (busca da variável de ambiente)
+# Para usar: set SENDGRID_API_KEY=sua_chave_aqui (Windows) ou export SENDGRID_API_KEY=sua_chave_aqui (Linux/Mac)
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', '')
+SMTP_SERVER = "smtp.sendgrid.net"
 SMTP_PORT = 587
-SMTP_PASSWORD = "7Aciqgr7@3278579"
+SMTP_USERNAME = "apikey"
 
 def create_email_body():
     """Cria o corpo do email em HTML"""
@@ -311,8 +314,8 @@ def send_email():
         server.ehlo()
 
         # Fazer login
-        print(f"Autenticando como {SENDER_EMAIL}...")
-        server.login(SENDER_EMAIL, SMTP_PASSWORD)
+        print(f"Autenticando com SendGrid...")
+        server.login(SMTP_USERNAME, SENDGRID_API_KEY)
 
         # Enviar email
         print(f"Enviando email para {RECIPIENT_EMAIL}...")
