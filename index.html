@@ -519,6 +519,72 @@
             background: linear-gradient(135deg, #00ff88, #00d4aa);
         }
 
+        .media-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .video-container {
+            position: relative;
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .video-container:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+
+        .video-label {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 245, 255, 0.9);
+            color: var(--dark);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 245, 255, 0.4);
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-container:hover .video-controls {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .media-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .footer {
             background: linear-gradient(135deg, rgba(10, 10, 15, 0.8) 0%, rgba(26, 26, 46, 0.8) 100%);
             border-top: 1px solid rgba(0, 245, 255, 0.2);
@@ -724,6 +790,26 @@
                     <div class="detail-item">
                         <span class="detail-label">Parcelas:</span>
                         <span class="detail-value">8x de R$ 100,00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Documentação Visual</h2>
+                <div class="media-gallery">
+                    <div class="video-container">
+                        <div class="video-label">Vídeo 01</div>
+                        <video controls preload="metadata">
+                            <source src="Video1.MP4" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeos.
+                        </video>
+                    </div>
+                    <div class="video-container">
+                        <div class="video-label">Vídeo 02</div>
+                        <video controls preload="metadata">
+                            <source src="Video2.MP4" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeos.
+                        </video>
                     </div>
                 </div>
             </div>
