@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrato na Oreia - Fogão Parcelado</title>
+    <title>Contrato Digital | Sistema de Parcelamento</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
 
         * {
             margin: 0;
@@ -14,29 +14,202 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #00f5ff;
+            --secondary: #ff006e;
+            --accent: #8b5cf6;
+            --dark: #0a0a0f;
+            --dark-light: #1a1a2e;
+            --text: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --success: #00ff88;
+            --glow: rgba(0, 245, 255, 0.5);
+        }
+
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: backgroundPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
         }
 
         .container {
-            max-width: 900px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow:
+                0 0 0 1px rgba(0, 245, 255, 0.1),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
-            animation: fadeIn 1s ease-in;
+            animation: containerEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes fadeIn {
+        @keyframes containerEnter {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(255, 0, 110, 0.2) 100%);
+            padding: 60px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 245, 255, 0.03) 2px,
+                    rgba(0, 245, 255, 0.03) 4px);
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .header-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(0, 245, 255, 0);
+            }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            color: var(--text-dim);
+            font-size: 1.1em;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            animation: sectionFadeIn 0.6s ease-out backwards;
+        }
+
+        .section:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .section:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes sectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
 
             to {
@@ -45,115 +218,103 @@
             }
         }
 
-        .header {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '🤝';
-            font-size: 150px;
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            opacity: 0.1;
-            transform: rotate(-15deg);
-        }
-
-        .header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5em;
-            color: white;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1em;
-            font-weight: 300;
-        }
-
-        .content {
-            padding: 50px;
-        }
-
-        .section {
-            margin-bottom: 35px;
-            animation: slideIn 0.8s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8em;
-            color: #667eea;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #f5576c;
-            padding-bottom: 10px;
-            display: inline-block;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 245, 255, 0.2);
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            box-shadow: 0 0 10px var(--glow);
         }
 
         .parties {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 25px;
             margin: 30px 0;
         }
 
         .party {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 30px;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .party::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .party:hover::before {
+            opacity: 1;
         }
 
         .party:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
         }
 
         .party h3 {
-            font-family: 'Playfair Display', serif;
-            color: #764ba2;
-            font-size: 1.3em;
-            margin-bottom: 10px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
         }
 
         .party p {
-            color: #555;
-            font-size: 1.2em;
-            font-weight: 600;
+            color: var(--text);
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .details {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            padding: 30px;
-            border-radius: 15px;
+            background: rgba(0, 245, 255, 0.03);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            padding: 35px;
+            border-radius: 16px;
             margin: 25px 0;
         }
 
         .detail-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 2px dashed rgba(102, 126, 234, 0.3);
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            padding-left: 10px;
+            border-color: rgba(0, 245, 255, 0.3);
         }
 
         .detail-item:last-child {
@@ -162,148 +323,277 @@
 
         .detail-label {
             font-weight: 600;
-            color: #667eea;
-            font-size: 1.1em;
+            color: var(--primary);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .detail-value {
-            font-size: 1.2em;
-            color: #333;
-            font-weight: 600;
+            font-size: 1.05em;
+            color: var(--text);
+            font-weight: 500;
+            line-height: 1.5;
         }
 
         .highlight {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            padding: 25px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(255, 0, 110, 0.2) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            padding: 40px;
+            border-radius: 16px;
             text-align: center;
-            margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(250, 112, 154, 0.3);
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.03) 50%,
+                    transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
         }
 
         .highlight h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2em;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
         }
 
         .highlight p {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 1.1em;
-            font-style: italic;
+            color: var(--text);
+            font-size: 1.15em;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
         }
 
         .payment-schedule {
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 15px;
-            padding: 25px;
+            background: rgba(10, 10, 15, 0.5);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 16px;
+            padding: 30px;
             margin: 25px 0;
         }
 
         .payment-item {
             display: flex;
             align-items: center;
-            padding: 12px;
-            margin: 8px 0;
-            background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            padding: 18px 20px;
+            margin: 10px 0;
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .payment-item:hover::before {
+            transform: scaleY(1);
         }
 
         .payment-item:hover {
-            background: linear-gradient(90deg, rgba(102, 126, 234, 0.2) 0%, rgba(245, 87, 108, 0.2) 100%);
-            transform: translateX(5px);
+            background: rgba(139, 92, 246, 0.1);
+            border-color: var(--accent);
+            transform: translateX(8px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.2);
         }
 
         .payment-number {
-            background: #667eea;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
             color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            margin-right: 15px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            margin-right: 20px;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
         }
 
         .payment-value {
-            font-size: 1.1em;
+            font-size: 1.05em;
             font-weight: 600;
-            color: #333;
+            color: var(--text);
             flex: 1;
         }
 
         .payment-date {
             font-size: 0.9em;
-            color: #667eea;
-            margin-left: 15px;
+            color: var(--primary);
+            margin-left: 20px;
+            font-family: 'JetBrains Mono', monospace;
             font-weight: 500;
         }
 
         .payment-proof {
             display: flex;
             align-items: center;
-            margin-left: 15px;
+            margin-left: 20px;
             font-size: 0.85em;
-            color: #999;
+            color: var(--text-dim);
         }
 
         .payment-proof input[type="checkbox"] {
-            margin-right: 5px;
+            margin-right: 8px;
             cursor: pointer;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
+            appearance: none;
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(0, 245, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .payment-proof input[type="checkbox"]:hover {
+            border-color: var(--primary);
+            background: rgba(0, 245, 255, 0.1);
+        }
+
+        .payment-proof input[type="checkbox"]:checked {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        .payment-proof input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--dark);
+            font-weight: bold;
+            font-size: 14px;
         }
 
         .payment-item.paid {
-            background: linear-gradient(90deg, rgba(76, 175, 80, 0.15) 0%, rgba(139, 195, 74, 0.15) 100%);
+            background: rgba(0, 255, 136, 0.05);
+            border-color: rgba(0, 255, 136, 0.3);
         }
 
         .payment-item.paid .payment-number {
-            background: #4caf50;
+            background: linear-gradient(135deg, #00ff88, #00d4aa);
         }
 
         .footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.8) 0%, rgba(26, 26, 46, 0.8) 100%);
+            border-top: 1px solid rgba(0, 245, 255, 0.2);
+            padding: 40px 50px;
             text-align: center;
-            color: white;
+            color: var(--text);
         }
 
         .footer-date {
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            opacity: 0.9;
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .signatures {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 50px;
             margin-top: 50px;
             padding-top: 30px;
         }
 
         .signature-line {
-            border-top: 2px solid #667eea;
-            padding-top: 10px;
+            border-top: 2px solid rgba(0, 245, 255, 0.3);
+            padding-top: 15px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .signature-line:hover {
+            border-top-color: var(--primary);
         }
 
         .signature-name {
             font-weight: 600;
-            color: #333;
-            margin-top: 10px;
+            color: var(--text);
+            margin-top: 12px;
+            font-size: 1.05em;
         }
 
-        .emoji-decoration {
-            font-size: 2em;
-            margin: 0 10px;
+        .terms-box {
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 30px;
+            border-radius: 16px;
+            line-height: 1.8;
+        }
+
+        .terms-box p {
+            margin-bottom: 20px;
+            color: var(--text);
+            transition: all 0.3s ease;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .terms-box p:hover {
+            background: rgba(139, 92, 246, 0.05);
+            padding-left: 20px;
+        }
+
+        .terms-box strong {
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95em;
+        }
+
+        .terms-box p:last-child {
+            background: linear-gradient(135deg, rgba(255, 216, 155, 0.1) 0%, rgba(25, 84, 123, 0.1) 100%);
+            border: 1px solid rgba(255, 216, 155, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            color: var(--text);
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
@@ -318,7 +608,56 @@
             }
 
             .header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
+            }
+
+            .header {
+                padding: 40px 30px;
+            }
+
+            .footer {
+                padding: 30px 20px;
+            }
+
+            .detail-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .payment-item {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .payment-date,
+            .payment-proof {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulse 2s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
             }
         }
     </style>
@@ -327,8 +666,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔥 Contrato na Oreia 🔥</h1>
-            <p>Venda de Fogão Parcelado na Palavra</p>
+            <div class="header-badge"><span class="status-indicator"></span>Sistema Ativo</div>
+            <h1>Contrato Digital</h1>
+            <p>Sistema de Parcelamento Inteligente</p>
         </div>
 
         <div class="content">
@@ -336,11 +676,11 @@
                 <h2 class="section-title">As Partes</h2>
                 <div class="parties">
                     <div class="party">
-                        <h3>👨‍🍳 Vendedor</h3>
+                        <h3>Vendedor</h3>
                         <p>Nicolas Rosa</p>
                     </div>
                     <div class="party">
-                        <h3>🤝 Comprador</h3>
+                        <h3>Comprador</h3>
                         <p>Renan Britto</p>
                     </div>
                 </div>
@@ -350,24 +690,47 @@
                 <h2 class="section-title">Objeto da Transação</h2>
                 <div class="details">
                     <div class="detail-item">
-                        <span class="detail-label">📦 Produto:</span>
-                        <span class="detail-value">Fogão</span>
+                        <span class="detail-label">Produto:</span>
+                        <span class="detail-value">Fogão Brastemp</span>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">💰 Valor Total:</span>
+                        <span class="detail-label">Marca:</span>
+                        <span class="detail-value">Brastemp</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Linha:</span>
+                        <span class="detail-value">Fogão Brastemp Clean / 4 Bocas</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Modelo:</span>
+                        <span class="detail-value">BYS4 (ou variações BYS4T / BYS4N)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Tipo:</span>
+                        <span class="detail-value">Piso, com mesa em inox e tampa de vidro temperado</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Acendimento:</span>
+                        <span class="detail-value">Automático</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Forno:</span>
+                        <span class="detail-value">Porta de vidro espelhado (modelo mais recente da linha Clean)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Valor Total:</span>
                         <span class="detail-value">R$ 800,00</span>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">📅 Parcelas:</span>
+                        <span class="detail-label">Parcelas:</span>
                         <span class="detail-value">8x de R$ 100,00</span>
                     </div>
                 </div>
             </div>
 
             <div class="highlight">
-                <h3>🤝 A Única Garantia 🤝</h3>
-                <p><span class="emoji-decoration">✨</span>A Palavra & A Amizade<span class="emoji-decoration">✨</span>
-                </p>
+                <h3>A Única Garantia</h3>
+                <p>A Palavra & A Amizade</p>
             </div>
 
             <div class="section">
@@ -376,7 +739,7 @@
                     <div class="payment-item">
                         <div class="payment-number">1</div>
                         <div class="payment-value">R$ 100,00 - Primeira Parcela</div>
-                        <div class="payment-date">📅 24/Dez/2025</div>
+                        <div class="payment-date">24/Dez/2025</div>
                         <div class="payment-proof">
                             <input type="checkbox" id="proof1">
                             <label for="proof1">Comprovante</label>
@@ -385,7 +748,7 @@
                     <div class="payment-item">
                         <div class="payment-number">2</div>
                         <div class="payment-value">R$ 100,00 - Segunda Parcela</div>
-                        <div class="payment-date">📅 24/Jan/2026</div>
+                        <div class="payment-date">24/Jan/2026</div>
                         <div class="payment-proof">
                             <input type="checkbox" id="proof2">
                             <label for="proof2">Comprovante</label>
@@ -394,7 +757,7 @@
                     <div class="payment-item">
                         <div class="payment-number">3</div>
                         <div class="payment-value">R$ 100,00 - Terceira Parcela</div>
-                        <div class="payment-date">📅 24/Fev/2026</div>
+                        <div class="payment-date">24/Fev/2026</div>
                         <div class="payment-proof">
                             <input type="checkbox" id="proof3">
                             <label for="proof3">Comprovante</label>
@@ -403,7 +766,7 @@
                     <div class="payment-item">
                         <div class="payment-number">4</div>
                         <div class="payment-value">R$ 100,00 - Quarta Parcela</div>
-                        <div class="payment-date">📅 24/Mar/2026</div>
+                        <div class="payment-date">24/Mar/2026</div>
                         <div class="payment-proof">
                             <input type="checkbox" id="proof4">
                             <label for="proof4">Comprovante</label>
@@ -412,7 +775,7 @@
                     <div class="payment-item">
                         <div class="payment-number">5</div>
                         <div class="payment-value">R$ 100,00 - Quinta Parcela</div>
-                        <div class="payment-date">📅 24/Abr/2026</div>
+                        <div class="payment-date">24/Abr/2026</div>
                         <div class="payment-proof">
                             <input type="checkbox" id="proof5">
                             <label for="proof5">Comprovante</label>
@@ -421,7 +784,7 @@
                     <div class="payment-item">
                         <div class="payment-number">6</div>
                         <div class="payment-value">R$ 100,00 - Sexta Parcela</div>
-                        <div class="payment-date">📅 24/Mai/2026</div>
+                        <div class="payment-date">24/Mai/2026</div>
                         <div class="payment-proof">
                             <input type="checkbox" id="proof6">
                             <label for="proof6">Comprovante</label>
@@ -430,7 +793,7 @@
                     <div class="payment-item">
                         <div class="payment-number">7</div>
                         <div class="payment-value">R$ 100,00 - Sétima Parcela</div>
-                        <div class="payment-date">📅 24/Jun/2026</div>
+                        <div class="payment-date">24/Jun/2026</div>
                         <div class="payment-proof">
                             <input type="checkbox" id="proof7">
                             <label for="proof7">Comprovante</label>
@@ -439,7 +802,7 @@
                     <div class="payment-item">
                         <div class="payment-number">8</div>
                         <div class="payment-value">R$ 100,00 - Oitava Parcela (Final)</div>
-                        <div class="payment-date">📅 24/Jul/2026</div>
+                        <div class="payment-date">24/Jul/2026</div>
                         <div class="payment-proof">
                             <input type="checkbox" id="proof8">
                             <label for="proof8">Comprovante</label>
@@ -450,30 +813,28 @@
 
             <div class="section">
                 <h2 class="section-title">Termos e Condições</h2>
-                <div
-                    style="background: rgba(102, 126, 234, 0.05); padding: 25px; border-radius: 15px; line-height: 1.8;">
-                    <p style="margin-bottom: 15px;">
-                        <strong>📜 Cláusula 1:</strong> Este acordo é firmado com base na confiança mútua e na amizade
+                <div class="terms-box">
+                    <p>
+                        <strong>Cláusula 1:</strong> Este acordo é firmado com base na confiança mútua e na amizade
                         existente entre as partes.
                     </p>
-                    <p style="margin-bottom: 15px;">
-                        <strong>🤝 Cláusula 2:</strong> O comprador Renan Britto se compromete a efetuar 8 (oito)
+                    <p>
+                        <strong>Cláusula 2:</strong> O comprador Renan Britto se compromete a efetuar 8 (oito)
                         pagamentos mensais de R$ 100,00 (cem reais) cada.
                     </p>
-                    <p style="margin-bottom: 15px;">
-                        <strong>💪 Cláusula 3:</strong> A única garantia deste contrato é a palavra empenhada entre
+                    <p>
+                        <strong>Cláusula 3:</strong> A única garantia deste contrato é a palavra empenhada entre
                         amigos, valor este inestimável e de honra. Não existe multa, juros ou correção monetária...
                         porque a cobrança é moral mesmo.
                     </p>
-                    <p style="margin-bottom: 15px;">
-                        <strong>❤️ Cláusula 4:</strong> O fio é meu.
+                    <p>
+                        <strong>Cláusula 4:</strong> O fio é meu.
                     </p>
-                    <p style="margin-bottom: 15px;">
-                        <strong>📸 Cláusula 5:</strong> O fio é meu.
+                    <p>
+                        <strong>Cláusula 5:</strong> O fio é meu.
                     </p>
-                    <p
-                        style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); padding: 15px; border-radius: 10px; color: white; font-weight: 600;">
-                        <strong>⚠️ Cláusula 6:</strong> Oficialmente, o fio é meu. 👶💀
+                    <p>
+                        <strong>Cláusula 6:</strong> Oficialmente, o fio é meu.
                     </p>
                 </div>
             </div>
@@ -497,15 +858,41 @@
         </div>
 
         <div class="footer">
-            <p class="footer-date">📅 Data: 24 de Novembro de 2025</p>
-            <p style="font-style: italic; opacity: 0.9;">
+            <p class="footer-date">Data: 24 de Novembro de 2025</p>
+            <p style="font-style: italic; color: var(--text-dim); margin-bottom: 10px;">
                 "Na amizade, a palavra vale mais que qualquer contrato."
             </p>
-            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
-                🔥 Que este fogão aqueça muitas refeições e momentos felizes! 🔥
+            <p style="margin-top: 15px; font-size: 0.9em; color: var(--text-dim);">
+                Que este fogão aqueça muitas refeições e momentos felizes.
             </p>
         </div>
     </div>
+
+    <script>
+        // Animação de checkboxes
+        document.querySelectorAll('.payment-proof input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const paymentItem = this.closest('.payment-item');
+                if (this.checked) {
+                    paymentItem.classList.add('paid');
+                } else {
+                    paymentItem.classList.remove('paid');
+                }
+            });
+        });
+
+        // Efeito parallax suave no scroll
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const x = clientX / window.innerWidth;
+            const y = clientY / window.innerHeight;
+
+            document.querySelector('.header::before')?.style.setProperty(
+                'transform',
+                `translate(${x * 20}px, ${y * 20}px)`
+            );
+        });
+    </script>
 </body>
 
 </html>
