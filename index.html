@@ -235,6 +235,37 @@
             font-size: 1.1em;
             font-weight: 600;
             color: #333;
+            flex: 1;
+        }
+
+        .payment-date {
+            font-size: 0.9em;
+            color: #667eea;
+            margin-left: 15px;
+            font-weight: 500;
+        }
+
+        .payment-proof {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        .payment-proof input[type="checkbox"] {
+            margin-right: 5px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .payment-item.paid {
+            background: linear-gradient(90deg, rgba(76, 175, 80, 0.15) 0%, rgba(139, 195, 74, 0.15) 100%);
+        }
+
+        .payment-item.paid .payment-number {
+            background: #4caf50;
         }
 
         .footer {
@@ -345,34 +376,74 @@
                     <div class="payment-item">
                         <div class="payment-number">1</div>
                         <div class="payment-value">R$ 100,00 - Primeira Parcela</div>
+                        <div class="payment-date">📅 24/Dez/2025</div>
+                        <div class="payment-proof">
+                            <input type="checkbox" id="proof1">
+                            <label for="proof1">Comprovante</label>
+                        </div>
                     </div>
                     <div class="payment-item">
                         <div class="payment-number">2</div>
                         <div class="payment-value">R$ 100,00 - Segunda Parcela</div>
+                        <div class="payment-date">📅 24/Jan/2026</div>
+                        <div class="payment-proof">
+                            <input type="checkbox" id="proof2">
+                            <label for="proof2">Comprovante</label>
+                        </div>
                     </div>
                     <div class="payment-item">
                         <div class="payment-number">3</div>
                         <div class="payment-value">R$ 100,00 - Terceira Parcela</div>
+                        <div class="payment-date">📅 24/Fev/2026</div>
+                        <div class="payment-proof">
+                            <input type="checkbox" id="proof3">
+                            <label for="proof3">Comprovante</label>
+                        </div>
                     </div>
                     <div class="payment-item">
                         <div class="payment-number">4</div>
                         <div class="payment-value">R$ 100,00 - Quarta Parcela</div>
+                        <div class="payment-date">📅 24/Mar/2026</div>
+                        <div class="payment-proof">
+                            <input type="checkbox" id="proof4">
+                            <label for="proof4">Comprovante</label>
+                        </div>
                     </div>
                     <div class="payment-item">
                         <div class="payment-number">5</div>
                         <div class="payment-value">R$ 100,00 - Quinta Parcela</div>
+                        <div class="payment-date">📅 24/Abr/2026</div>
+                        <div class="payment-proof">
+                            <input type="checkbox" id="proof5">
+                            <label for="proof5">Comprovante</label>
+                        </div>
                     </div>
                     <div class="payment-item">
                         <div class="payment-number">6</div>
                         <div class="payment-value">R$ 100,00 - Sexta Parcela</div>
+                        <div class="payment-date">📅 24/Mai/2026</div>
+                        <div class="payment-proof">
+                            <input type="checkbox" id="proof6">
+                            <label for="proof6">Comprovante</label>
+                        </div>
                     </div>
                     <div class="payment-item">
                         <div class="payment-number">7</div>
                         <div class="payment-value">R$ 100,00 - Sétima Parcela</div>
+                        <div class="payment-date">📅 24/Jun/2026</div>
+                        <div class="payment-proof">
+                            <input type="checkbox" id="proof7">
+                            <label for="proof7">Comprovante</label>
+                        </div>
                     </div>
                     <div class="payment-item">
                         <div class="payment-number">8</div>
                         <div class="payment-value">R$ 100,00 - Oitava Parcela (Final)</div>
+                        <div class="payment-date">📅 24/Jul/2026</div>
+                        <div class="payment-proof">
+                            <input type="checkbox" id="proof8">
+                            <label for="proof8">Comprovante</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -391,17 +462,28 @@
                     </p>
                     <p style="margin-bottom: 15px;">
                         <strong>💪 Cláusula 3:</strong> A única garantia deste contrato é a palavra empenhada entre
-                        amigos, valor este inestimável e de honra.
+                        amigos, valor este inestimável e de honra. Não existe multa, juros ou correção monetária...
+                        porque a cobrança é moral mesmo.
                     </p>
                     <p style="margin-bottom: 15px;">
                         <strong>❤️ Cláusula 4:</strong> A amizade entre as partes permanece acima de qualquer transação
-                        comercial.
+                        comercial. Porém, atrasos sucessivos podem resultar em piadas constrangedoras em público.
+                    </p>
+                    <p style="margin-bottom: 15px;">
+                        <strong>📸 Cláusula 5:</strong> O comprador deve anexar comprovante de pagamento para cada
+                        parcela. Sem comprovante = não pagou = churrasco sem carne.
                     </p>
                     <p
                         style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); padding: 15px; border-radius: 10px; color: white; font-weight: 600;">
-                        <strong>⚠️ Cláusula 5 (Garantia Alternativa):</strong> Em caso de inadimplência, o vendedor
+                        <strong>⚠️ Cláusula 6 (Garantia Alternativa - Humor Negro):</strong> Em caso de inadimplência
+                        total, o vendedor
                         Nicolas Rosa se reserva o direito de adotar o filho do comprador Renan Britto como forma de
-                        compensação. 👶😄
+                        compensação e quitação da dívida. O menor será bem tratado e receberá educação de qualidade
+                        (melhor que as parcelas do fogão). 👶😄💀
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.85em; color: #999; font-style: italic;">
+                        * Esta última cláusula é obviamente uma brincadeira de mau gosto entre amigos. Qualquer
+                        semelhança com tráfico de pessoas é mera coincidência. 😅
                     </p>
                 </div>
             </div>
