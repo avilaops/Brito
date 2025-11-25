@@ -5,6 +5,17 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from datetime import datetime
+from pathlib import Path
+
+# Carregar variáveis de ambiente do arquivo .env
+env_file = Path(__file__).parent / '.env'
+if env_file.exists():
+    with open(env_file) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                key, value = line.split('=', 1)
+                os.environ[key] = value
 
 # Configurações do remetente
 SENDER_NAME = "Nicolas, o Avassalador"
@@ -17,8 +28,10 @@ RECIPIENT_EMAIL = "Renanbrito80@gmail.com"
 RECIPIENT_WHATSAPP = "+55 17 99664-5886"
 
 # Configurações SendGrid (busca da variável de ambiente)
-# Para usar: set SENDGRID_API_KEY=sua_chave_aqui (Windows) ou export SENDGRID_API_KEY=sua_chave_aqui (Linux/Mac)
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', '')
+# Para usar: $env:SENDGRID_API_KEY="sua_chave_aqui" (PowerShell)
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+if not SENDGRID_API_KEY:
+    raise ValueError("SENDGRID_API_KEY não configurada. Use: $env:SENDGRID_API_KEY='sua_chave'")
 SMTP_SERVER = "smtp.sendgrid.net"
 SMTP_PORT = 587
 SMTP_USERNAME = "apikey"

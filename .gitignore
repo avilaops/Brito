@@ -1,0 +1,6 @@
+.env
+Video1.MP4
+Video2.MP4
+__pycache__/
+*.pyc
+*.pyo
